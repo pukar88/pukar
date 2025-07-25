@@ -4,7 +4,6 @@ import "./Product.css"
 // import { useEffect } from 'react';
 // import { useState } from 'react';
 import axios from"axios"
-
 const Product = () => {
     const [products, setProducts] = useState([]);
     const[loading, setLoading]=useState(true);
@@ -56,5 +55,4 @@ useEffect(()=>{
 if (loading) return <p>Loading...</p>
 if(error) return <p style={{color:"red"}}>{error}</p>;
 }
-
 export default Product

@@ -5,6 +5,11 @@ import Img from '../../assets/Img.png';
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const toggleFullscreen = () => {
+    setIsFullscreen(!isFullscreen);
+  };
 
   return (
     <div>
@@ -35,7 +40,10 @@ const Home = () => {
         }}>
           {/* Like button on the left */}
           <button 
-            onClick={() => setIsLiked(!isLiked)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsLiked(!isLiked);
+            }}
             style={{
               background: 'none',
               border: 'none',
@@ -51,25 +59,29 @@ const Home = () => {
             {isLiked ? '❤️' : '🖤'}
           </button>
 
-          {/* Photo on the right */}
+          {/* Photo on the right with fullscreen toggle */}
           <img
             src={Img}
             alt="Pukar Bartaula"
             width={400}
             style={{ 
               cursor: 'pointer',
-              display: 'block'
+              display: 'block',
+              position: isFullscreen ? 'fixed' : 'static',
+              top: isFullscreen ? '0' : 'auto',
+              left: isFullscreen ? '0' : 'auto',
+              width: isFullscreen ? '100vw' : '400px',
+              height: isFullscreen ? '100vh' : 'auto',
+              objectFit: isFullscreen ? 'contain' : 'cover',
+              zIndex: isFullscreen ? '1000' : 'auto',
+              backgroundColor: isFullscreen ? 'rgba(0,0,0,0.9)' : 'transparent',
+              padding: isFullscreen ? '20px' : '0',
+              transition: 'all 0.3s ease'
             }}
-            onClick={() => setIsModalOpen(true)}
+            onClick={toggleFullscreen}
           />
         </div>
       </section>
-
-      {isModalOpen && (
-        <div className="modal" onClick={() => setIsModalOpen(false)}>
-          <img src={Img} alt="Fullscreen" className="modal-img" />
-        </div>
-      )}
     </div>
   );
 };

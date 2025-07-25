@@ -1,23 +1,64 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './login.css';
-
+import mountEverest from "C:/Users/LENOVO/OneDrive/Desktop/Mount-Everest.webp";
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setError('');
+
+    if (!email || !password) {
+      setError('Please enter both email and password');
+      return;
+    }
 
     if (email === 'pukarbartaula@gmail.com' && password === '9816322799') {
-      alert('Login successful!');
-      navigate('/'); // ✅ redirect to introduction page (usually "/")
+      setIsLoggedIn(true);
     } else {
-      alert('Invalid email or password');
+      setError('Invalid email or password');
     }
   };
 
+  if (isLoggedIn) {
+    return (
+      <div className="login">
+        <div className="login-container" style={{ textAlign: 'center' }}>
+          <h2>Thank you for logging in!</h2>
+          <img 
+            src={mountEverest} 
+            alt="Mount Everest" 
+            style={{ 
+              width: '250px',
+              height: '250px',
+              objectFit: 'cover',
+              borderRadius: '8px',
+              margin: '20px 0'
+            }}
+          />
+          <button 
+            onClick={() => setIsLoggedIn(false)}
+            style={{
+              padding: '10px 20px',
+              backgroundColor: '#f0f0f0',
+              border: '1px solid #ccc',
+              borderRadius: '4px',
+              cursor: 'pointer'
+            }}
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Your original login form (completely unchanged)
   return (
     <div className="login">
       <div className="login-container">
