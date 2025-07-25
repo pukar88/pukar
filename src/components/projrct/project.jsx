@@ -1,12 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Project = () => {
-  const youtubeUrl = "https://www.youtube.com/watch?v=EEnxRe73vQk";
-  const videoId = youtubeUrl.split('v=')[1]; // Extract video ID from URL
+  const [searchInput, setSearchInput] = useState("");
+  const [videoId, setVideoId] = useState("EEnxRe73vQk");
   
+  const handleSearch = (e) => {
+    e.preventDefault();
+    // Extract video ID from various YouTube URL formats
+    const extractedId = searchInput.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/)?.[1] || searchInput;
+    setVideoId(extractedId);
+  };
+
   return (
     <div style={styles.container}>
       <h2 style={styles.title}>Project Video</h2>
+      
+      {/* YouTube Search Bar */}
+      <div style={styles.searchContainer}>
+        <form onSubmit={handleSearch} style={styles.searchForm}>
+          <input
+            type="text"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            placeholder="Enter YouTube URL or Video ID"
+            style={styles.searchInput}
+          />
+          <button type="submit" style={styles.searchButton}>
+            Search
+          </button>
+        </form>
+      </div>
       
       {/* Embedded YouTube Video */}
       <div style={styles.videoContainer}>
@@ -25,7 +48,7 @@ const Project = () => {
       {/* Direct Link */}
       <div style={styles.linkContainer}>
         <a 
-          href={youtubeUrl} 
+          href={`https://www.youtube.com/watch?v=${videoId}`} 
           target="_blank" 
           rel="noopener noreferrer"
           style={styles.link}
@@ -37,7 +60,7 @@ const Project = () => {
   );
 };
 
-// Styling
+// Styling (added search-related styles while keeping existing ones)
 const styles = {
   container: {
     maxWidth: '800px',
@@ -49,9 +72,35 @@ const styles = {
     color: '#333',
     textAlign: 'center',
   },
+  searchContainer: {
+    margin: '20px 0',
+    textAlign: 'center',
+  },
+  searchForm: {
+    display: 'flex',
+    justifyContent: 'center',
+    gap: '10px',
+  },
+  searchInput: {
+    padding: '10px',
+    width: '60%',
+    borderRadius: '4px',
+    border: '1px solid #ddd',
+    fontSize: '16px',
+  },
+  searchButton: {
+    padding: '10px 20px',
+    backgroundColor: '#ff0000',
+    color: 'white',
+    border: 'none',
+    borderRadius: '4px',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s',
+  },
   videoContainer: {
     position: 'relative',
-    paddingBottom: '56.25%', // 16:9 aspect ratio
+    paddingBottom: '56.25%',
     height: 0,
     overflow: 'hidden',
     margin: '20px 0',
