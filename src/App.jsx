@@ -1,5 +1,5 @@
 import './App.css'
-import About from './components/about'
+import About from './components/About'
 import { Route, Routes } from 'react-router-dom'
 import Location from './components/LOCATION.JSX'
 import Contact from './components/contact/contact'

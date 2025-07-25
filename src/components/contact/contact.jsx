@@ -9,7 +9,7 @@ const Contact = () => {
 }
 else{
 return(
-    <h1> please log in </h1>
+    <h1> if you want to contact me then habibi come to Nepal </h1>
 )
 }
 }
