@@ -1,7 +1,7 @@
 import './App.css'
 import About from './components/About'
 import { Route, Routes } from 'react-router-dom'
-import Location from './components/LOCATION.JSX'
+import Location from './components/Location'
 import Contact from './components/contact/contact'
 import Counter from './components/Counter/Counter'
 import Counter2 from './components/Counter/Counter2'
