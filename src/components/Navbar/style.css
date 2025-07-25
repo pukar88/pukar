@@ -1,0 +1,40 @@
+.navbar {
+    display: flex;
+   justify-content: space-between;
+
+    background: rgb(0, 128, 77);
+    padding: 10px 40px;
+    color: aquamarine;
+}
+
+.navbar-list {
+    align-items: center;
+    display: flex;
+    gap: 30px;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.navbar-list a {
+    text-decoration: none;
+    border: none;
+    padding: 5px 10px;
+    color: rgb(226, 43, 43);
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.navbar button {
+    border: none;
+    padding: 5px 10px;
+    background: white;
+    color: brown;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.navbar button:hover {
+    background-color: blue;
+}
